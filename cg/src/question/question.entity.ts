@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { AnswerEntity } from "src/answer/answer.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { JoinAttribute } from "typeorm/query-builder/JoinAttribute";
 
 @Entity()
 export class QuestionEntity {
@@ -11,5 +13,6 @@ export class QuestionEntity {
     @Column()
     problem: string;
 
-    // TODO: Answer is a one to many relation
+    @OneToOne(() => AnswerEntity, answer => answer.question)
+    answer: AnswerEntity;
 }
